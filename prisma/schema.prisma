@@ -32,8 +32,8 @@ model User {
   comments Comment[] // one-to-many
   likes    Like[] // one-to-many
 
-  followers Follow[] @relation("following") // users who follow this user
-  following Follow[] @relation("follower") // users this user follows
+  followers Follows[] @relation("following") // users who follow this user
+  following Follows[] @relation("follower") // users this user follows
 
   notifications        Notification[] @relation("userNotifications") // notifications received by a user
   notificationsCreated Notification[] @relation("notificationCreator") // notifications triggered by a user
@@ -83,7 +83,7 @@ model Like {
   @@index([userId, postId]) // composite index for faster queries
 }
 
-model Follow {
+model Follows {
   followerId  String
   followingId String
   createdAt   DateTime @default(now())
